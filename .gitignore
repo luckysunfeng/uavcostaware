@@ -1,0 +1,8 @@
+build/
+__pycache__/
+*.py[cod]
+*.o
+*.obj
+*.exe
+results/reproduced/*.csv
+results/reproduced/*.log
