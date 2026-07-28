@@ -1,0 +1,116 @@
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{pgfplots}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{compat=1.17}
+
+\definecolor{lnsblue}{RGB}{31,119,180}
+\definecolor{initgray}{RGB}{105,105,105}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=2 by 1, horizontal sep=1.25cm},
+  width=7.35cm,
+  height=5.65cm,
+  xmin=85,
+  xmax=415,
+  xtick={100,200,300,400},
+  xlabel={Number of users, $N$},
+  grid=both,
+  major grid style={gray!28, line width=0.45pt},
+  minor grid style={gray!12, line width=0.25pt},
+  tick align=outside,
+  tick label style={font=\small},
+  label style={font=\small},
+  title style={font=\small\bfseries, yshift=-1mm},
+  legend style={
+    font=\scriptsize,
+    draw=gray!55,
+    fill=white,
+    rounded corners=1pt,
+    cells={anchor=west}
+  },
+  error bars/y dir=both,
+  error bars/y explicit
+]
+
+\nextgroupplot[
+  title={(a) Served-user ratio},
+  ylabel={Served-user ratio},
+  ymin=0.968,
+  ymax=1.004,
+  ytick={0.97,0.98,0.99,1.00},
+  legend pos=south east
+]
+\addplot[
+  initgray,
+  line width=1.15pt,
+  mark=square*,
+  mark size=2.2pt,
+  error bars/.cd,
+  y dir=both,
+  y explicit
+] coordinates {
+  (100,0.9850) +- (0,0.0111)
+  (200,0.9857) +- (0,0.0082)
+  (300,0.9899) +- (0,0.0059)
+  (400,0.9920) +- (0,0.0041)
+};
+\addlegendentry{Block-centroid initialization}
+
+\addplot[
+  lnsblue,
+  line width=1.35pt,
+  mark=*,
+  mark size=2.5pt,
+  error bars/.cd,
+  y dir=both,
+  y explicit
+] coordinates {
+  (100,0.9993) +- (0,0.0025)
+  (200,1.0000) +- (0,0.0000)
+  (300,1.0000) +- (0,0.0000)
+  (400,1.0000) +- (0,0.0000)
+};
+\addlegendentry{Proposed LNS}
+
+\nextgroupplot[
+  title={(b) Active UAV-BS fleet},
+  ylabel={Number of active UAV-BSs, $K$},
+  ymin=0,
+  ymax=44,
+  ytick={0,10,20,30,40}
+]
+\addplot[
+  initgray,
+  line width=1.15pt,
+  mark=square*,
+  mark size=2.2pt,
+  error bars/.cd,
+  y dir=both,
+  y explicit
+] coordinates {
+  (100,10.00) +- (0,0.00)
+  (200,20.00) +- (0,0.00)
+  (300,30.00) +- (0,0.00)
+  (400,40.00) +- (0,0.00)
+};
+
+\addplot[
+  lnsblue,
+  line width=1.35pt,
+  mark=*,
+  mark size=2.5pt,
+  error bars/.cd,
+  y dir=both,
+  y explicit
+] coordinates {
+  (100,6.07) +- (0,0.45)
+  (200,12.47) +- (0,1.01)
+  (300,19.43) +- (0,1.48)
+  (400,28.00) +- (0,1.98)
+};
+
+\end{groupplot}
+\end{tikzpicture}
+\end{document}
